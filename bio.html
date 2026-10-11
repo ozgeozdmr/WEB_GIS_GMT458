@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biography</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<style>
+  /* köpük kahve gazete */
+  .paper {
+    background-color: #f1e3d0;
+    background-image: radial-gradient(circle at 30% 20%, #f8eee1 0, transparent 60%);
+    border: 4px double #4a3522;
+    box-shadow: 6px 6px 0 rgba(74, 53, 34, .25);
+    color: #2b1d0e;
+  }
+  .paper h1 { border-bottom: 3px solid #4a3522; color: #2b1d0e; }
+  .paper h2, .paper h3 { font-family: Georgia, serif; color: #2b1d0e; }
+  .paper h3 { margin-bottom: .3rem; }
+  .paper a { color: #5a3410; font-weight: bold; }
+  .paper img { width: 100%; margin: .5rem 0; filter: grayscale(1) sepia(.35); border: 2px solid #4a3522; box-sizing: border-box; }
+  .subtitle { text-align: center; margin: 0 0 1rem; font-style: italic; }
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&larr; Home</a>
+<main>
+<div class="paper">
+
+  <!-- SAYFA 1 -->
+  <div class="sheet">
+    <h1>The Özge Times</h1>
+    <p class="subtitle">Geomatics · Maps · Art · Curiosity</p>
+    <h2>Geomatics Student Turns Data into Practical Solutions</h2>
+    <div class="cols">
+      <img src="images/2.jpeg" alt="Özge">
+      <p><b>ANKARA —</b> Özge Özdemir is a fourth-year Geomatics Engineering student at Hacettepe University. She has built her theoretical background and technical skills around spatial data analysis, remote sensing and GNSS technologies.</p>
+      <p>When she faces an engineering problem, she works with artificial intelligence tools as a partner: she gives them the right prompts and structure, generates Python code and integrates it into her projects. She enjoys bringing technology into her workflow to create practical solutions.</p>
+      <p>Her peers know her as a clear communicator who grasps complex topics quickly and explains them simply. In team projects she is cooperative, constructive and focused on common goals.</p>
+      <h3>Education</h3>
+      <p><b>B.Sc. in Geomatics Engineering</b>, Hacettepe University, Ankara (2022 – present).</p>
+      <p><b>Bridging disciplines:</b> spatial data intelligence in unusual areas such as forensic sciences.<br>
+      <b>Geodesy &amp; AI:</b> AI-assisted Python solutions for coordinate transformations.<br>
+      <b>LiDAR &amp; 3D:</b> data collection and processing with GreenValley 360 MLS.<br>
+      <b>GIS:</b> organizing and analyzing spatial data with QGIS.<br>
+      <b>Photogrammetry:</b> basic 3D modeling with PhotoModeler.<br>
+      <b>Remote sensing:</b> satellite imagery and sensor types.</p>
+    </div>
+  </div>
+
+  <!-- SAYFA 2 -->
+  <div class="sheet hide">
+    <h1>The Özge Times</h1>
+    <p class="subtitle">Page Two · Work &amp; Skills</p>
+    <h2>From Point Clouds to Public Offices</h2>
+    <div class="cols">
+      <h3 style="margin-top:0">Field Surveyor (Applied Coursework), Hacettepe University</h3>
+      <p>Since February 2026 she has run hands-on GNSS measurements: RTK operations, base station setups and high-precision kinematic observations. She rotates between measurement assistant and sketch artist in the survey team and sets up instruments in different field conditions.</p>
+      <h3>Intern, Karayolları 4th Regional Directorate</h3>
+      <p>August – September 2026. She experienced a government institution from the inside, learned about document management, saw how files are created in legal processes and examined plans for areas where roads will be built through expropriation.</p>
+      <img src="images/5.jpeg" alt="Özge">
+      <h3>Intern, Geomap</h3>
+      <p>July – August 2026. She learned cadastral information and its application field, how to draw on 3D LiDAR data, and why document management matters.</p>
+      <h3>LiDAR Specialist, Elya Technology</h3>
+      <p>October 2025 – July 2026. She collected high-precision point cloud data with the GreenValley 360 MLS mobile laser scanning system, applied different processing workflows to turn raw LiDAR data into 3D models, used AI-assisted tools to streamline analysis and created social media content for the company.</p>
+      <h3>Umut Simit Sarayı</h3>
+      <p>As a part-time sales and operational assistant she balanced cash handling, food service and cleaning with full-time engineering studies.</p>
+      <h3>Skills at a Glance</h3>
+      <p>Python · QGIS · ArcGIS · GNSS · LiDAR · Photogrammetry · 3D modelling · Remote sensing · Graphic design · Social media · Teamwork · Communication · Turkish (native), English.</p>
+      <h3>Certificates</h3>
+      <p>TMMOB Chamber of Surveying and Cadastre Engineers: 8th GIS Congress (attendance), GNSS Positioning within TUREF (training), Young Surveyors Workshop (attendance).</p>
+    </div>
+  </div>
+
+  <!-- SAYFA 3 -->
+  <div class="sheet hide">
+    <h1>The Özge Times</h1>
+    <p class="subtitle">Page Three · Art &amp; Life</p>
+    <h2>The Creative Side of an Engineer</h2>
+    <div class="cols">
+      <h3 style="margin-top:0">Photography on VSCO</h3>
+      <p>Street photography, everyday aesthetics and sources of visual inspiration that reflect her personal view of life, sometimes with captions explaining their meaning. <a href="https://vs.co/a6nt60px" target="_blank">Open the portfolio</a></p>
+      <img src="images/7.jpeg" alt="Özge">
+      <h3>Magazine Collecting</h3>
+      <p>She buys every new issue of the Turkish magazine <i>Ot</i>, even when there is no time to read it yet, so that she never misses one. Sometimes she finds herself in its pages, sometimes inspiration.</p>
+      <h3>Yoga</h3>
+      <p>She is learning yoga, and it makes her feel stronger, calm and at peace. She listens to her body and lets her thoughts flow away.</p>
+      <h3>Also</h3>
+      <p>Clay figures, street art, sketching and a driving licence (B).</p>
+    </div>
+  </div>
+
+</div>
+<p class="flipbar"><button data-flip="-1">&larr; Prev</button> <button data-flip="1">Next &rarr;</button></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maps</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.5.2/ol.css">
+</head>
+<body>
+<a class="back" href="index.html">&larr; Home</a>
+<main>
+<h1>My places</h1>
+<div class="row">
+  <div id="m1" class="mapbox"></div>
+  <div class="legend"><b>Legend</b><br>
+    <span class="dot" style="background:#6fcf97"></span>Visited<br>
+    <span class="dot" style="background:#6fb7ff"></span>Want to go<br>
+    <span class="dot" style="background:#ff8fb1"></span>Favourite<br>
+    <span class="dot" style="background:#ffd24d"></span>Special<br>
+    <small>Zoom in to level 5 to see the markers. Click a marker for details.</small>
+  </div>
+</div>
+
+<h1>Find me</h1>
+<div class="row">
+  <div id="m2" class="mapbox"></div>
+  <div class="legend"><b>Legend</b><br>
+    <span class="dot" style="background:#ff8fb1"></span>School<br>
+    <span class="dot" style="background:#6fb7ff"></span>Home (approximate)
+  </div>
+</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ol@7.5.2/dist/ol.js"></script>
+<script>
+// ---- Leaflet: places (Issue 1 zoom threshold, Issue 2 no world repeat) ----
+const bnd = [[-90,-180],[90,180]];
+const m = L.map('m1', {minZoom:2, maxBounds:bnd, maxBoundsViscosity:1}).setView([39,35], 4);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors', noWrap: true
+}).addTo(m);
+
+const col = {visited:'#6fcf97', want:'#6fb7ff', fav:'#ff8fb1', special:'#ffd24d'};
+// büyük halkalar altta, küçük noktalar üstte görünsün (aynı yerde iki kategori olabilsin)
+const rad = {fav:16, special:16, visited:9, want:9};
+
+// [ad, kategori, enlem, boylam, not]
+const places = [
+  // visited
+  ['Istanbul','visited',41.01,28.98,'I went many times, for sightseeing and for holidays.'],
+  ['Edirne','visited',41.68,26.56,'I went for sightseeing.'],
+  ['Bolu','visited',40.74,31.61,'Visited.'],
+  ['Eskişehir','visited',39.78,30.52,'Visited.'],
+  ['Konya','visited',37.87,32.49,'Visited.'],
+  ['Antalya','visited',36.90,30.71,'Visited.'],
+  ['Izmir','visited',38.42,27.14,'Visited.'],
+  ['Manisa','visited',38.62,27.43,'Visited.'],
+  ['Nevşehir','visited',38.63,34.71,'Visited.'],
+  ['Bartın','visited',41.64,32.34,'Visited.'],
+  ['Zonguldak','visited',41.46,31.80,'Visited.'],
+  ['Düzce','visited',40.84,31.16,'Visited.'],
+  ['Muğla','visited',37.22,28.36,'Visited.'],
+  // want to go
+  ['London','want',51.51,-0.13,'I have wanted to go since I was too small to remember.'],
+  ['Fiji','want',-17.71,178.07,'On my wish list.'],
+  ['Tokyo','want',35.68,139.65,'On my wish list.'],
+  ['Belgrade','want',44.79,20.46,'On my wish list.'],
+  ['Niagara Falls','want',43.08,-79.07,'On my wish list.'],
+  ['Germany (Autobahn)','want',50.50,9.50,'I want to drive on the Autobahn with no speed limit. (approximate spot)'],
+  // favourite
+  ['Ankara','fav',39.93,32.86,'My favourite: I make myself love any place I can travel to, even just for a holiday.'],
+  ['Istanbul','fav',41.01,28.98,'My favourite city, together with Ankara.'],
+  // special
+  ['London','special',51.51,-0.13,'Special: my childhood dream.']
+];
+
+const grp = L.layerGroup(
+  places.slice()
+    .sort((a,b) => rad[b[1]] - rad[a[1]])
+    .map(p => L.circleMarker([p[2],p[3]], {
+      radius: rad[p[1]], color:'#fff', weight:2, fillColor:col[p[1]], fillOpacity:.95
+    }).bindPopup('<b>'+p[0]+'</b><br>'+p[4]))
+);
+
+const ESIK = 5;
+function upd() {
+  const show = m.getZoom() >= ESIK;
+  if (show && !m.hasLayer(grp)) grp.addTo(m);
+  if (!show && m.hasLayer(grp)) m.removeLayer(grp);
+}
+m.on('zoomend', upd);
+upd();
+
+// ---- OpenLayers: find me ----
+// [ad, boylam, enlem, renk]; ev konumu bilerek yaklaşık (mahalle düzeyi)
+const pts = [
+  ['School (Hacettepe)', 32.735, 39.866, '#ff8fb1'],
+  ['Home (approx., Sincan)', 32.58, 39.96, '#6fb7ff']
+];
+const feats = pts.map(p => {
+  const f = new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat([p[1],p[2]])));
+  f.setStyle(new ol.style.Style({
+    image: new ol.style.Circle({
+      radius: 11,
+      fill: new ol.style.Fill({color:p[3]}),
+      stroke: new ol.style.Stroke({color:'#fff', width:3})
+    }),
+    text: new ol.style.Text({
+      text: p[0], offsetY: 24, font: 'bold 14px Arial',
+      fill: new ol.style.Fill({color:'#111'}),
+      stroke: new ol.style.Stroke({color:'#fff', width:4})
+    })
+  }));
+  return f;
+});
+new ol.Map({
+  target: 'm2',
+  layers: [
+    new ol.layer.Tile({source: new ol.source.OSM({wrapX:false})}),
+    new ol.layer.Vector({source: new ol.source.Vector({features: feats})})
+  ],
+  view: new ol.View({
+    center: ol.proj.fromLonLat([32.66,39.91]), zoom: 11, minZoom: 2,
+    extent: ol.proj.transformExtent([-180,-85,180,85],'EPSG:4326','EPSG:3857')
+  })
+});
+</script>
+</body>
+</html>
