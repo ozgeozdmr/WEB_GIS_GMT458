@@ -1,0 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(198, 159, 235);
+}
+
+#map {
+    height: 400px;
+}

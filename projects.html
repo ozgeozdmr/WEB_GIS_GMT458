@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Özge | projects </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
 </head>
 <body>
 
@@ -13,7 +16,17 @@
   <a href="projects.html">Projects</a>
 </nav>
    <h1>projects </h1> 
+    <div id="map"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        const harita = L.map('map').setView([39.0, 35.0], 5);
 
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(harita);
+
+        L.marker([39.93, 32.86]).addTo(harita).bindPopup('Ankara');
+    </script>
    <p>  ..... . </p>
 </body>
 </html>
