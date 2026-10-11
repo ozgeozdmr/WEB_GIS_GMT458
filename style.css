@@ -6,10 +6,10 @@ body {
 }
 
 #map, #olmap {
-    width: 90vw;
-    max-width: 400px;
+    width: 150vw;
+    max-width: 500px;
     height: 90vw;
-    max-height: 400px;
+    max-height: 500px;
     border-radius: 50%;
     margin: 0 auto 30px auto;
 }
